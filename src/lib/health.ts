@@ -49,7 +49,9 @@ export const parseHealthResponse = (value: unknown): HealthResponse => {
               return [key, item]
             }
 
-            throw new TypeError(`Health response check "${key}" must be a string`)
+            throw new TypeError(
+              `Health response check "${key}" must be a string`
+            )
           })
         )
 

@@ -1,7 +1,4 @@
-import {
-  useColorScheme,
-  useLocalStorage,
-} from '@teo-garcia/react-shared/hooks'
+import { useColorScheme, useLocalStorage } from '@teo-garcia/react-shared/hooks'
 import { Laptop, Moon, Sun } from 'lucide-react'
 import { useEffect } from 'react'
 
@@ -11,10 +8,7 @@ const isServer = import.meta.env.SSR
 
 function applyTheme(theme: ThemeMode) {
   if (isServer) return
-  const resolved =
-    theme === 'system'
-      ? resolveSystemTheme()
-      : theme
+  const resolved = theme === 'system' ? resolveSystemTheme() : theme
   globalThis.document.documentElement.classList.toggle(
     'dark',
     resolved === 'dark'
