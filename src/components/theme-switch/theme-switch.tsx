@@ -13,14 +13,18 @@ function applyTheme(theme: ThemeMode) {
   if (isServer) return
   const resolved =
     theme === 'system'
-      ? globalThis.document.documentElement.classList.contains('dark')
-        ? 'dark'
-        : 'light'
+      ? resolveSystemTheme()
       : theme
   globalThis.document.documentElement.classList.toggle(
     'dark',
     resolved === 'dark'
   )
+}
+
+function resolveSystemTheme(): Exclude<ThemeMode, 'system'> {
+  return globalThis.document.documentElement.classList.contains('dark')
+    ? 'dark'
+    : 'light'
 }
 
 export const ThemeSwitch = () => {
