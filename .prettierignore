@@ -1,0 +1,13 @@
+.DS_Store
+node_modules
+/.output
+/build
+/dist
+/public
+/package
+.env
+.env.*
+!.env.example
+pnpm-lock.yaml
+package-lock.json
+yarn.lock

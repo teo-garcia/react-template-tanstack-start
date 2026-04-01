@@ -1,0 +1,20 @@
+{
+  "extends": "@teo-garcia/tsconfig-shared/react-router",
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "~/*": ["./src/*"]
+    },
+    "types": ["vitest/globals", "@vitest/browser-playwright"]
+  },
+  "include": [
+    "src/**/*.ts",
+    "src/**/*.tsx",
+    "src/vite-env.d.ts",
+    "vite.config.ts",
+    "vitest.config.ts",
+    "vitest.setup.ts",
+    "playwright.config.ts",
+    "e2e/**/*.ts"
+  ]
+}

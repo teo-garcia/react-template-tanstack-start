@@ -1,0 +1,67 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.dev
+    container_name: tanstack_app
+    restart: unless-stopped
+    environment:
+      NODE_ENV: development
+      DATABASE_URL: postgresql://postgres:postgres@db:5432/postgres?schema=public
+    ports:
+      - "${PORT:-3000}:3000"
+    volumes:
+      - ./src:/app/src
+      - ./public:/app/public
+      - ./vite.config.ts:/app/vite.config.ts
+    depends_on:
+      db:
+        condition: service_healthy
+    networks:
+      - tanstack-network
+
+  db:
+    image: postgres:18-alpine
+    container_name: tanstack_db
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${DATABASE_USER:-postgres}
+      POSTGRES_PASSWORD: ${DATABASE_PASSWORD:-postgres}
+      POSTGRES_DB: ${DATABASE_NAME:-postgres}
+    ports:
+      - "${DATABASE_PORT:-5432}:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${DATABASE_USER:-postgres}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+    networks:
+      - tanstack-network
+
+  redis:
+    image: redis:8-alpine
+    container_name: tanstack_redis
+    restart: unless-stopped
+    ports:
+      - "${REDIS_PORT:-6379}:6379"
+    volumes:
+      - redis_data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 5s
+    networks:
+      - tanstack-network
+
+volumes:
+  postgres_data:
+  redis_data:
+
+networks:
+  tanstack-network:
+    driver: bridge
