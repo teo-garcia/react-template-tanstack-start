@@ -24,8 +24,8 @@ importers:
         specifier: ^1.167.16
         version: 1.167.16(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(vite@7.3.1(@types/node@24.12.0)(jiti@2.6.1)(lightningcss@1.32.0)(tsx@4.21.0)(yaml@2.8.3))
       '@teo-garcia/react-shared':
-        specifier: ^1.6.0
-        version: 1.6.0(@tanstack/react-query@5.96.0(react@19.2.4))(@testing-library/react@16.3.2(@testing-library/dom@10.4.1)(@types/react-dom@19.2.3(@types/react@19.2.14))(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
+        specifier: ^1.6.1
+        version: 1.6.1(@tanstack/react-query@5.96.0(react@19.2.4))(@testing-library/react@16.3.2(@testing-library/dom@10.4.1)(@types/react-dom@19.2.3(@types/react@19.2.14))(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
       lucide-react:
         specifier: ^0.577.0
         version: 0.577.0(react@19.2.4)
@@ -1147,8 +1147,8 @@ packages:
     peerDependencies:
       prettier: ^3.0.0
 
-  '@teo-garcia/react-shared@1.6.0':
-    resolution: {integrity: sha512-4dh6p3m8Qgy3vxwq2ahA/5Y+UISkC/6G9B6NvYb37vNuIJqpgmLXb5XED6bYjKGva6m+oVSRaivnGEq6IQ7jJg==}
+  '@teo-garcia/react-shared@1.6.1':
+    resolution: {integrity: sha512-Y+rgrSXfeOCrNt1gD76bK6N4Uf24Pq/8OCDziZwxtL8SKIEWMxFZ4rRVs+2pkIgjIvo8veBsOeN9IIHbYkHNNw==}
     engines: {node: '>=24'}
     peerDependencies:
       '@tanstack/react-query': ^5.0.0
@@ -1160,6 +1160,10 @@ packages:
         optional: true
       '@testing-library/react':
         optional: true
+
+  '@teo-garcia/ts-core@0.1.1':
+    resolution: {integrity: sha512-lhqRmPUtJkkchAzWMfhcNViq5HI/Tn2dxMb7stZ/S/1Iuyh/Z55Rpp3+8OMNYnEu4nVEhpf6/rAS8XySbef9cA==}
+    engines: {node: '>=24'}
 
   '@teo-garcia/tsconfig-shared@0.2.0':
     resolution: {integrity: sha512-HIhMuGDzoqd2JNXfmzG4HQZWpPOs7kFsxo2XwIOUZg0uN8/iGEopTMDcX0fHjivgH1WJqHp1j+hh17hNa/Dwqw==}
@@ -3133,6 +3137,11 @@ packages:
     engines: {node: '>=20.16.0'}
     hasBin: true
 
+  srvx@0.11.15:
+    resolution: {integrity: sha512-iXsux0UcOjdvs0LCMa2Ws3WwcDUozA3JN3BquNXkaFPP7TpRqgunKdEgoZ/uwb1J6xaYHfxtz9Twlh6yzwM6Tg==}
+    engines: {node: '>=20.16.0'}
+    hasBin: true
+
   stackback@0.0.2:
     resolution: {integrity: sha512-1XMJE5fQo1jGH6Y/7ebnwPOBEkIEnT4QF32d5R1+VXdXveM0IBMJt8zfaxX1P3QhVwrYe+576+jkANtSS2mBbw==}
 
@@ -4467,8 +4476,9 @@ snapshots:
     dependencies:
       prettier: 3.8.1
 
-  '@teo-garcia/react-shared@1.6.0(@tanstack/react-query@5.96.0(react@19.2.4))(@testing-library/react@16.3.2(@testing-library/dom@10.4.1)(@types/react-dom@19.2.3(@types/react@19.2.14))(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(react-dom@19.2.4(react@19.2.4))(react@19.2.4)':
+  '@teo-garcia/react-shared@1.6.1(@tanstack/react-query@5.96.0(react@19.2.4))(@testing-library/react@16.3.2(@testing-library/dom@10.4.1)(@types/react-dom@19.2.3(@types/react@19.2.14))(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(react-dom@19.2.4(react@19.2.4))(react@19.2.4)':
     dependencies:
+      '@teo-garcia/ts-core': 0.1.1
       clsx: 2.1.1
       react: 19.2.4
       react-dom: 19.2.4(react@19.2.4)
@@ -4476,6 +4486,8 @@ snapshots:
     optionalDependencies:
       '@tanstack/react-query': 5.96.0(react@19.2.4)
       '@testing-library/react': 16.3.2(@testing-library/dom@10.4.1)(@types/react-dom@19.2.3(@types/react@19.2.14))(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
+
+  '@teo-garcia/ts-core@0.1.1': {}
 
   '@teo-garcia/tsconfig-shared@0.2.0': {}
 
@@ -5762,7 +5774,7 @@ snapshots:
   h3@2.0.1-rc.16:
     dependencies:
       rou3: 0.8.1
-      srvx: 0.11.13
+      srvx: 0.11.15
 
   has-bigints@1.1.0: {}
 
@@ -6654,6 +6666,8 @@ snapshots:
   source-map@0.7.6: {}
 
   srvx@0.11.13: {}
+
+  srvx@0.11.15: {}
 
   stackback@0.0.2: {}
 
