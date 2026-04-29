@@ -1,6 +1,8 @@
-import { useColorScheme, useLocalStorage } from '@teo-garcia/react-shared/hooks'
 import { Laptop, Moon, Sun } from 'lucide-react'
 import { useEffect } from 'react'
+
+import { useColorScheme } from '~/lib/hooks/use-color-scheme'
+import { useLocalStorage } from '~/lib/hooks/use-local-storage'
 
 type ThemeMode = 'light' | 'dark' | 'system'
 

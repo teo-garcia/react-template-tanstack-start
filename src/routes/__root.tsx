@@ -5,7 +5,6 @@ import {
   Scripts,
 } from '@tanstack/react-router'
 import { TanStackRouterDevtools } from '@tanstack/react-router-devtools'
-import { SkipLink } from '@teo-garcia/react-shared/components/skip-link'
 
 import { GlobalProviders } from '~/components/global-providers/global-providers'
 import { ThemeSwitch } from '~/components/theme-switch/theme-switch'
@@ -52,7 +51,6 @@ function RootDocument({ children }: Readonly<{ children: React.ReactNode }>) {
       <body>
         <GlobalProviders>
           <div className='min-h-screen'>
-            <SkipLink href='#main-content' />
             <main id='main-content'>{children}</main>
           </div>
           <ThemeSwitch />

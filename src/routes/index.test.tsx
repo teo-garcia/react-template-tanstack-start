@@ -1,7 +1,6 @@
-/* eslint-disable simple-import-sort/imports */
 import axe from 'axe-core'
 
-import { HomePage } from './index'
+import { HomePage } from '~/components/home-page/home-page'
 import { render } from '~/lib/test/render'
 
 test('HomePage renders with providers', () => {

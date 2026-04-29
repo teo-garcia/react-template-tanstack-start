@@ -29,7 +29,6 @@ ecosystem
 | **Type Safety**  | TypeScript with strict mode                       |
 | **Testing**      | Vitest, Testing Library, Playwright, MSW          |
 | **Code Quality** | ESLint, Prettier, Husky, lint-staged              |
-| **Shared**       | @teo-garcia/react-shared components and hooks     |
 
 ---
 
@@ -105,7 +104,6 @@ The app starts on `http://localhost:3000`.
 | `@teo-garcia/prettier-config-shared` | Prettier formatting |
 | `@teo-garcia/tsconfig-shared`        | TypeScript settings |
 | `@teo-garcia/vitest-config-shared`   | Test configuration  |
-| `@teo-garcia/react-shared`           | React primitives    |
 
 ---
 
