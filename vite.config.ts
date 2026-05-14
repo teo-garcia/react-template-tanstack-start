@@ -7,6 +7,9 @@ import { defineConfig } from 'vite'
 const shouldAnalyze = process.env.ANALYZE === 'true'
 
 export default defineConfig({
+  resolve: {
+    tsconfigPaths: true,
+  },
   server: {
     port: 3000,
   },
