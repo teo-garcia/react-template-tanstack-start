@@ -5,6 +5,7 @@ import {
   Scripts,
 } from '@tanstack/react-router'
 import { TanStackRouterDevtools } from '@tanstack/react-router-devtools'
+import { ThemeProvider } from 'better-themes'
 
 import { GlobalProviders } from '~/components/global-providers/global-providers'
 import { ThemeSwitch } from '~/components/theme-switch/theme-switch'
@@ -48,13 +49,19 @@ function RootDocument({ children }: Readonly<{ children: React.ReactNode }>) {
       <head>
         <HeadContent />
       </head>
-      <body>
-        <GlobalProviders>
-          <div className='min-h-screen'>
-            <main id='main-content'>{children}</main>
-          </div>
-          <ThemeSwitch />
-        </GlobalProviders>
+      <body suppressHydrationWarning>
+        <ThemeProvider
+          attribute='class'
+          defaultTheme='system'
+          disableTransitionOnChange
+        >
+          <GlobalProviders>
+            <div className='min-h-screen'>
+              <main id='main-content'>{children}</main>
+            </div>
+            <ThemeSwitch />
+          </GlobalProviders>
+        </ThemeProvider>
         <TanStackRouterDevtools position='top-left' />
         <Scripts />
       </body>

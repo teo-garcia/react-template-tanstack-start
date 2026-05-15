@@ -1,38 +1,24 @@
+import { useTheme } from 'better-themes'
 import { Laptop, Moon, Sun } from 'lucide-react'
-import { useEffect } from 'react'
-
-import { useColorScheme } from '~/lib/hooks/use-color-scheme'
-import { useLocalStorage } from '~/lib/hooks/use-local-storage'
+import { useSyncExternalStore } from 'react'
 
 type ThemeMode = 'light' | 'dark' | 'system'
 
-const isServer = import.meta.env.SSR
-
-function applyTheme(theme: ThemeMode) {
-  if (isServer) return
-  const resolved = theme === 'system' ? resolveSystemTheme() : theme
-  globalThis.document.documentElement.classList.toggle(
-    'dark',
-    resolved === 'dark'
-  )
-}
-
-function resolveSystemTheme(): Exclude<ThemeMode, 'system'> {
-  return globalThis.document.documentElement.classList.contains('dark')
-    ? 'dark'
-    : 'light'
-}
+const noop = () => {}
+const subscribe = () => noop
+const getClientSnapshot = () => true
+const getServerSnapshot = () => false
+const useIsMounted = () =>
+  useSyncExternalStore(subscribe, getClientSnapshot, getServerSnapshot)
 
 export const ThemeSwitch = () => {
-  const [theme, setTheme] = useLocalStorage<ThemeMode>('theme', 'system')
-  const systemTheme = useColorScheme()
+  const { theme, setTheme } = useTheme()
+  const mounted = useIsMounted()
 
-  useEffect(() => {
-    applyTheme(theme === 'system' ? systemTheme : theme)
-  }, [systemTheme, theme])
+  const activeTheme: ThemeMode = (theme ?? 'system') as ThemeMode
 
   const getNextTheme = (): ThemeMode => {
-    switch (theme) {
+    switch (activeTheme) {
       case 'light': {
         return 'dark'
       }
@@ -46,15 +32,15 @@ export const ThemeSwitch = () => {
   }
 
   const getCurrentIcon = () => {
-    switch (theme) {
+    switch (activeTheme) {
       case 'light': {
-        return <Sun className='size-5' />
+        return <Sun className='size-5' aria-hidden='true' />
       }
       case 'dark': {
-        return <Moon className='size-5' />
+        return <Moon className='size-5' aria-hidden='true' />
       }
       default: {
-        return <Laptop className='size-5' />
+        return <Laptop className='size-5' aria-hidden='true' />
       }
     }
   }
@@ -62,11 +48,23 @@ export const ThemeSwitch = () => {
   return (
     <button
       onClick={() => setTheme(getNextTheme())}
-      aria-label={`Theme switcher, current mode: ${theme}`}
+      aria-label={
+        mounted
+          ? `Theme switcher, current mode: ${activeTheme}`
+          : 'Theme switcher'
+      }
       className='fixed right-4 top-4 rounded-lg border p-2 transition-colors duration-200 hover:bg-accent hover:text-accent-foreground md:right-8 md:top-8'
-      title={`Current theme: ${theme}. Click to switch to ${getNextTheme()}`}
+      title={
+        mounted
+          ? `Current theme: ${activeTheme}. Click to switch to ${getNextTheme()}`
+          : 'Theme switcher'
+      }
     >
-      {getCurrentIcon()}
+      {mounted ? (
+        getCurrentIcon()
+      ) : (
+        <Laptop className='size-5' aria-hidden='true' />
+      )}
     </button>
   )
 }
