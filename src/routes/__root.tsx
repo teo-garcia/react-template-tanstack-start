@@ -10,6 +10,7 @@ import { ThemeProvider } from 'better-themes'
 import { GlobalProviders } from '~/components/global-providers/global-providers'
 import { ThemeSwitch } from '~/components/theme-switch/theme-switch'
 import { env } from '~/lib/env'
+import { getCanonicalUrl, getSeoMeta } from '~/lib/seo'
 import appCss from '~/lib/styles/globals.css?url'
 
 export const Route = createRootRoute({
@@ -17,15 +18,10 @@ export const Route = createRootRoute({
     meta: [
       { charSet: 'utf8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      {
-        title: 'Home | RTTS',
-      },
-      {
-        name: 'description',
-        content: 'React Template TanStack Start',
-      },
+      ...getSeoMeta(),
     ],
     links: [
+      { rel: 'canonical', href: getCanonicalUrl() },
       { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
       {
         rel: 'preconnect',
