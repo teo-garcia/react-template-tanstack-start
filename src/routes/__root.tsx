@@ -37,7 +37,7 @@ export const Route = createRootRoute({
         href: 'https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap',
       },
       { rel: 'stylesheet', href: appCss },
-      { rel: 'icon', href: '/favicon.ico' },
+      { rel: 'icon', href: '/favicon.ico', type: 'image/x-icon' },
     ],
   }),
   errorComponent: ErrorComponent,
