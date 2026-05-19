@@ -8,6 +8,12 @@ import { TanStackRouterDevtools } from '@tanstack/react-router-devtools'
 import { ThemeProvider } from 'better-themes'
 
 import { GlobalProviders } from '~/components/global-providers/global-providers'
+import {
+  RouteLoadingState,
+  RouteNotFoundState,
+  RouteState,
+  RouteStateButton,
+} from '~/components/route-state/route-state'
 import { ThemeSwitch } from '~/components/theme-switch/theme-switch'
 import { env } from '~/lib/env'
 import { getCanonicalUrl, getSeoMeta } from '~/lib/seo'
@@ -38,6 +44,7 @@ export const Route = createRootRoute({
   }),
   errorComponent: ErrorComponent,
   notFoundComponent: NotFoundComponent,
+  pendingComponent: RouteLoadingState,
   component: RootComponent,
 })
 
@@ -75,39 +82,23 @@ function RootDocument({ children }: Readonly<{ children: React.ReactNode }>) {
   )
 }
 
-function ErrorComponent({ error }: Readonly<{ error: Error }>) {
+function ErrorComponent({
+  error,
+  reset,
+}: Readonly<{ error: Error; reset: () => void }>) {
   return (
     <RootDocument>
-      <main className='fixed inset-0 flex items-center justify-center bg-red-50 dark:bg-red-950/20'>
-        <div className='max-w-md rounded-lg bg-white p-8 shadow-xl dark:bg-gray-800'>
-          <div className='mb-4 text-4xl font-bold text-red-600 dark:text-red-400'>
-            Error
-          </div>
-          <div className='mb-6 text-gray-600 dark:text-gray-300'>
-            {error.message}
-          </div>
-          {env.isDevelopment && error.stack && (
-            <div className='rounded-sm bg-gray-100 p-4 dark:bg-gray-900'>
-              <code className='font-mono text-sm text-gray-800 dark:text-gray-200'>
-                {error.stack}
-              </code>
-            </div>
-          )}
-        </div>
-      </main>
+      <RouteState
+        actions={<RouteStateButton onClick={reset}>Try again</RouteStateButton>}
+        description={error.message || 'The current route failed to render.'}
+        details={env.isDevelopment ? error.stack : undefined}
+        title='Something went wrong'
+        variant='error'
+      />
     </RootDocument>
   )
 }
 
 function NotFoundComponent() {
-  return (
-    <section className='flex h-screen flex-col items-center justify-center gap-y-10 xl:gap-y-16'>
-      <h1 className='text-4xl font-semibold md:text-6xl lg:text-7xl'>
-        Page not found
-      </h1>
-      <p className='md:text-2xl'>
-        The page you are looking for does not exist.
-      </p>
-    </section>
-  )
+  return <RouteNotFoundState />
 }

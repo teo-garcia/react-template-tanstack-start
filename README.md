@@ -84,6 +84,18 @@ The app starts on `http://localhost:3000`.
 
 ---
 
+## Route States
+
+TanStack Router conventions own route-state wiring:
+
+| File                                     | Purpose                                             |
+| ---------------------------------------- | --------------------------------------------------- |
+| `src/router.tsx`                         | Router-wide pending, error, and not-found defaults  |
+| `src/routes/__root.tsx`                  | Root route pending, error, and not-found components |
+| `src/components/route-state/route-state` | Shared local state UI                               |
+
+---
+
 ## Shared Governance
 
 | Area               | Tooling                                             |

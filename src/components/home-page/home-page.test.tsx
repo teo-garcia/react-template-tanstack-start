@@ -1,7 +1,8 @@
 import axe from 'axe-core'
 
-import { HomePage } from '~/components/home-page/home-page'
 import { render } from '~/lib/test/render'
+
+import { HomePage } from './home-page'
 
 test('HomePage renders with providers', () => {
   const { container } = render(<HomePage />)
