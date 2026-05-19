@@ -6,7 +6,6 @@ import {
 } from '@tanstack/react-router'
 import { TanStackRouterDevtools } from '@tanstack/react-router-devtools'
 import { ThemeProvider } from 'better-themes'
-import { useEffect } from 'react'
 
 import { GlobalProviders } from '~/components/global-providers/global-providers'
 import {
@@ -57,11 +56,15 @@ function RootComponent() {
   )
 }
 
-function RootDocument({ children }: Readonly<{ children: React.ReactNode }>) {
+function RootDocument({
+  children,
+  title,
+}: Readonly<{ children: React.ReactNode; title?: string }>) {
   return (
     <html lang='en' suppressHydrationWarning>
       <head>
         <HeadContent />
+        {title ? <title>{title}</title> : null}
       </head>
       <body suppressHydrationWarning>
         <ThemeProvider
@@ -87,12 +90,8 @@ function ErrorComponent({
   error,
   reset,
 }: Readonly<{ error: Error; reset: () => void }>) {
-  useEffect(() => {
-    document.title = `Something went wrong | ${siteMetadata.shortName}`
-  }, [])
-
   return (
-    <RootDocument>
+    <RootDocument title={`Something went wrong | ${siteMetadata.shortName}`}>
       <RouteState
         actions={<RouteStateButton onClick={reset}>Try again</RouteStateButton>}
         description={error.message || 'The current route failed to render.'}
@@ -105,9 +104,9 @@ function ErrorComponent({
 }
 
 function NotFoundComponent() {
-  useEffect(() => {
-    document.title = `Page not found | ${siteMetadata.shortName}`
-  }, [])
-
-  return <RouteNotFoundState />
+  return (
+    <RootDocument title={`Page not found | ${siteMetadata.shortName}`}>
+      <RouteNotFoundState />
+    </RootDocument>
+  )
 }
