@@ -67,11 +67,7 @@ function RootDocument({
         {title ? <title>{title}</title> : null}
       </head>
       <body suppressHydrationWarning>
-        <ThemeProvider
-          attribute='class'
-          defaultTheme='system'
-          disableTransitionOnChange
-        >
+        <ThemeProvider attribute='class' defaultTheme='system' enableSystem>
           <GlobalProviders>
             <div className='min-h-screen'>
               <main id='main-content'>{children}</main>
