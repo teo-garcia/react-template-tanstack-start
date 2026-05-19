@@ -6,6 +6,7 @@ import {
 } from '@tanstack/react-router'
 import { TanStackRouterDevtools } from '@tanstack/react-router-devtools'
 import { ThemeProvider } from 'better-themes'
+import { useEffect } from 'react'
 
 import { GlobalProviders } from '~/components/global-providers/global-providers'
 import {
@@ -16,7 +17,7 @@ import {
 } from '~/components/route-state/route-state'
 import { ThemeSwitch } from '~/components/theme-switch/theme-switch'
 import { env } from '~/lib/env'
-import { getCanonicalUrl, getSeoMeta } from '~/lib/seo'
+import { getCanonicalUrl, getSeoMeta, siteMetadata } from '~/lib/seo'
 import appCss from '~/lib/styles/globals.css?url'
 
 export const Route = createRootRoute({
@@ -86,6 +87,10 @@ function ErrorComponent({
   error,
   reset,
 }: Readonly<{ error: Error; reset: () => void }>) {
+  useEffect(() => {
+    document.title = `Something went wrong | ${siteMetadata.shortName}`
+  }, [])
+
   return (
     <RootDocument>
       <RouteState
@@ -100,5 +105,9 @@ function ErrorComponent({
 }
 
 function NotFoundComponent() {
+  useEffect(() => {
+    document.title = `Page not found | ${siteMetadata.shortName}`
+  }, [])
+
   return <RouteNotFoundState />
 }
